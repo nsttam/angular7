@@ -1,0 +1,35 @@
+
+<div class="row">
+  <div class="col">
+    <h1>{{ searchByName }}</h1>
+    <h1 *ngIf="searchByType">{{ searchByType.name }}</h1>
+  </div>
+</div>
+<div class="row">
+  <form class="form-group">
+    <div class="row">
+      <div class="col">
+        <input class="form-control"
+               type="text"
+               [(ngModel)]="searchByName"
+               name="searchByName">
+      </div>
+      <div class="col">
+        <select class="form-control"
+                name="searchByType"
+                [(ngModel)]="searchByType">
+          <option *ngFor="let tfor of typeTab" [ngValue]="tfor">
+            {{ tfor.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!--Pour afficher tous les animes-->
+<div class="row">
+  <div class="col-md-4" *ngFor="let animeFor of animeTab"> <!--Parcourir tableau animeTab-->
+    <app-anime [anime]="animeFor"></app-anime> <!--DOY VALOR QUE VIENE DE PADRE AL HIJO /animeComponant a propriete qu s'appelle anime. Devant de [anime] en anime.ts doit avoir un input-->
+  </div>
+</div>

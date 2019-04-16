@@ -1,0 +1,32 @@
+<!--
+Pour l'ensemble du template, j'ai juste fait un copier/coller d'add-type, en ne modifiant que partiellement la validation.
+-->
+<div class="flex-row">
+  <h1 class="d-flex justify-content-center basic-margin">Add a new Studio !</h1>
+</div>
+<div class="row">
+  <div class="col text-center basic-margin">
+    <form class="form-group" (submit)="save()">
+      <!--Je rajoute un taille minimal à la validation du champ-->
+      <input type="text"
+             [(ngModel)]="name"
+             class="form-control"
+             #nameCtrl="ngModel"
+             required
+             minlength="4"
+             name="name"
+             placeholder="Please say my name !"
+      >
+      <!--Ici, je vise une erreur particulière du champ nom grâceà ce bout de code : nameCtrl.errors?.required-->
+      <div class="alert alert-danger basic-margin" *ngIf="nameCtrl.dirty&& nameCtrl.errors?.required"> <!--error en required-->
+        Le champ "nom" est obligatoire
+        <!--Si le champ présent n'est pas rempli alors qu'il est obligatoire, l'erreur "required" sera présente,
+        affichant ainsi cette div. -->
+      </div>
+      <div class="alert alert-danger basic-margin" *ngIf="nameCtrl.dirty&& nameCtrl.errors?.minlength"><!--quand error en minlength-->
+        Le champ "nom" doit avoir une taille minimum de 4
+      </div>
+      <button class="btn btn-success basic-margin" type="submit" [disabled]="nameCtrl.invalid">Save me!</button>
+    </form>
+  </div>
+</div>

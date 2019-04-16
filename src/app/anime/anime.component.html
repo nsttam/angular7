@@ -1,0 +1,18 @@
+<div class="card">
+  <img class="card-img-top" src="{{ anime.img }}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ anime.name }}</h5> <!--si meto anime solo, me aparece objet objet, signifie que je n'ai pas vise proprietes-->
+    <p class="card-text">
+      <strong>Produit par : </strong> {{ anime.studio.name }}
+    </p>
+    <p class="card-text">
+      <strong>Sorti le : </strong> {{ anime.date | date : 'dd/MM/yyyy' }} <!--|pipe pour changer format date-->
+    </p>
+    <p class="card-text">
+      <span *ngFor="let typeFor of anime.types">{{ typeFor.name + ' '}}</span>
+    </p>
+    <button class="btn btn-primary" routerLink="/anime-details/{{ anime.name }}"> <!--d'abord je cree anime details y hago su routing je replace :name por el nombre del anime-->
+      Cliquez ici !
+    </button>
+  </div>
+</div>

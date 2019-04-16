@@ -1,0 +1,104 @@
+<!--Ici, je vais créer un champ par attribut pour ma classe Anime : un nom, une img, une date, un studio, un type, un âge limite-->
+<div class="flex-row">
+  <h1 class="d-flex justify-content-center basic-margin">Add a new Type !</h1>
+</div>
+<div class="row">
+  <div class="col text-center basic-margin">
+    <!--Je donne un identifiant avec le # à mon form afin de pouvoir utiliser la validation (cf tout en bas du formulaire)-->
+    <form class="form-group" (submit)="save()" #f="ngForm"> <!--Saved haciendo submit, methode save en services-->
+      <div class="row">
+        <div class="col">
+          <!--Input type text pour le nom, qui est une chaîne de caractères// required est champ obligatoire-->
+          <input type="text"
+                 [(ngModel)]="name"
+                 class="form-control basic-margin"
+                 #nameCtrl="ngModel"
+                 required 
+                 name="name"
+                 placeholder="Please say my name !"
+          > <!--identifiant a input #nameCtrl-->
+        </div>
+
+        <div class="col">
+          <!--Input type text pour l'image, qui est une chaîne de caractères. Ce n'est pas super pratique,c'est pour cela que nous
+          allons rendre le champs non obligatoire-->
+          <input type="text"
+                 [(ngModel)]="img"
+                 class="form-control basic-margin"
+                 #imgCtrl="ngModel"
+                 name="img"
+                 placeholder="Give me an image url !"
+          >
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <!--Input type date, pour la date. Ca va me renvoyer une chaine de caractère sous le format (yyyy-MM-dd) qu'il va falloir que je convertisse -->
+          <input type="date"
+                 [(ngModel)]="date"
+                 class="form-control basic-margin"
+                 #dateCtrl="ngModel"
+                 required
+                 name="date"
+                 placeholder="Specify a date"
+          >
+        </div>
+        <div class="col">
+          <!--Select pour le Studio-->
+          <select class="form-control basic-margin" [(ngModel)]="studio" name="studio" #studioCtrl="ngModel" required>
+            <option *ngFor="let studioFor of studios" [ngValue]="studioFor">
+              {{studioFor.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <!--Select pour l'âge limite, les possibilités étant réduites -->
+          <select class="form-control basic-margin" [(ngModel)]="ageLimit" name="ageLimit" #ageLimitCtrl="ngModel" required>
+            <option *ngFor="let ageLimitFor of ages" [ngValue]="ageLimitFor">
+              {{ageLimitFor}}
+            </option>
+          </select>
+        </div>
+        <div class="col">
+          <!--Select pour le type. Pour le moment, on en utilisera qu'un.-->
+          <select class="form-control basic-margin" [(ngModel)]="type" name="type" #typeCtrl="ngModel" required>
+            <option *ngFor="let typeFor of types" [ngValue]="typeFor">
+              {{typeFor.name}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="alert alert-danger basic-margin"  *ngIf="nameCtrl.dirty && nameCtrl.invalid">
+            Le champ "nom" est obligatoire
+          </div>
+
+          <div class="alert alert-danger basic-margin"  *ngIf="dateCtrl.dirty && dateCtrl.invalid">
+            Le champ "date" est obligatoire
+          </div>
+
+          <div class="alert alert-danger basic-margin"  *ngIf="typeCtrl.dirty && typeCtrl.invalid">
+            Le champ "type" est obligatoire
+          </div>
+
+          <div class="alert alert-danger basic-margin"  *ngIf="ageLimitCtrl.dirty && ageLimitCtrl.invalid">
+            Le champ "age limite" est obligatoire
+          </div>
+
+          <div class="alert alert-danger basic-margin"  *ngIf="studioCtrl.dirty && studioCtrl.invalid">
+            Le champ "studio" est obligatoire
+          </div>
+        </div>
+      </div>
+
+
+
+      <button class="btn btn-success basic-margin" type="submit" [disabled]="f.invalid">Save me!</button><!--Disabled quand form f est invalid-->
+    </form>
+  </div>
+</div>

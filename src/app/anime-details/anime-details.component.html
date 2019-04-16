@@ -1,0 +1,18 @@
+
+<img [src]="anime.img" *ngIf="anime.ageLimit !== 18; else eighteen">
+
+<ng-template #eighteen>
+  <img src="assets/18ans.png">
+</ng-template>
+
+<h1>{{ anime.name }}</h1>
+
+<p>{{ anime.ageLimit }}</p>
+
+<div [ngSwitch]="anime.ageLimit">
+  <img *ngSwitchCase="10" src="assets/10ans.png">
+  <img *ngSwitchCase="12" src="assets/12ans.png">
+  <img *ngSwitchCase="16" src="assets/16ans.png">
+  <img *ngSwitchCase="18" src="assets/18ans.png">
+  <p *ngSwitchDefault>Il n'y a pas de limitations !</p>
+</div>

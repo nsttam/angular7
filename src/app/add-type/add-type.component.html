@@ -1,0 +1,24 @@
+<div class="flex-row">
+  <h1 class="d-flex justify-content-center basic-margin">Add a new Type !</h1>
+</div>
+<div class="row">
+  <div class="col text-center basic-margin">
+    <form class="form-group" (submit)="save()"> 
+      <input type="text"
+             [(ngModel)]="name"
+             class="form-control"
+             #nameCtrl="ngModel"
+             required
+             name="name"
+             placeholder="Please say my name !"
+      >
+      <div class="alert alert-danger basic-margin"  *ngIf="nameCtrl.dirty && nameCtrl.invalid"> <!--s'affiche quand est dirty et invalid-->
+        Le champ "nom" est obligatoire
+      </div>
+      <p><i>Je lis ici la propriété disabled de mon bouton à un boolean : si le boolean est vrai, mon bouton est
+        désactivé, et vice-versa.</i></p>
+      <p><i>Tant que mon formulaire est invalide, mon bouton reste desactivé</i></p>
+      <button class="btn btn-success basic-margin" type="submit" [disabled]="nameCtrl.invalid">Save me!</button> <!--button disabled quand nom invalid-->
+    </form>
+  </div>
+</div>
